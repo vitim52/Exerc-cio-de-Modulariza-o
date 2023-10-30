@@ -1,0 +1,150 @@
+1)
+def criar_contato():
+    nome = input("Digite o nome do contato: ")
+    endereco = input("Digite o endereço do contato: ")
+    
+    telefones = []
+    while True:
+        telefone = input("Digite um número de telefone (ou deixe em branco para terminar): ")
+        if not telefone:
+            break
+        telefones.append(telefone)
+    
+    novo_contato = Contato(nome, endereco, telefones)
+    
+    # Aqui você pode salvar o novo contato em uma lista, banco de dados, ou onde desejar
+    # Por enquanto, vamos apenas imprimir os detalhes do contato
+    print("\nNovo Contato Criado:")
+    print(f"Nome: {novo_contato.nome}")
+    print(f"Endereço: {novo_contato.endereco}")
+    print("Números de Telefone:")
+    for telefone in novo_contato.telefones:
+        print(telefone)
+
+if __name__ == "__main__":
+    criar_contato()
+
+
+2)
+contatos = [
+    {
+        "nome": "João da Silva",
+        "endereco": "Rua A, 123",
+        "telefone": "123-456-7890"
+    },
+    {
+        "nome": "Maria Souza",
+        "endereco": "Avenida B, 456",
+        "telefone": "987-654-3210"
+    },
+    # Adicione mais contatos conforme necessário
+]
+
+# Função para listar todos os contatos
+def listar_contatos():
+    print("Lista de Contatos:")
+    for contato in contatos:
+        print(f"Nome: {contato['nome']}")
+        print(f"Endereço: {contato['endereco']}")
+        print(f"Telefone: {contato['telefone']}")
+        print()  # Linha em branco entre os contatos
+
+# Função principal
+def main():
+    listar_contatos()
+
+if __name__ == "__main__":
+    main()
+
+
+3)
+def criar_contato(contatos):
+    nome = input("Digite o nome do contato: ")
+    telefone = input("Digite o número de telefone: ")
+    contatos[nome] = telefone
+    print(f"Contato '{nome}' com número '{telefone}' foi criado com sucesso.")
+
+# Função para deletar um contato
+def deletar_contato(contatos):
+    nome = input("Digite o nome do contato que deseja deletar: ")
+    if nome in contatos:
+        del contatos[nome]
+        print(f"Contato '{nome}' foi deletado com sucesso.")
+    else:
+        print(f"Contato '{nome}' não foi encontrado na lista.")
+
+# Função principal
+def main():
+    contatos = {}  # Inicializa a lista de contatos como um dicionário vazio
+
+    while True:
+        print("\nOpções:")
+        print("1. Criar Contato")
+        print("2. Deletar Contato")
+        print("3. Sair")
+
+        opcao = input("Escolha uma opção (1/2/3): ")
+
+        if opcao == '1':
+            criar_contato(contatos)
+        elif opcao == '2':
+            deletar_contato(contatos)
+        elif opcao == '3':
+            print("Saindo do programa. Até logo!")
+            break
+        else:
+            print("Opção inválida. Escolha 1, 2 ou 3.")
+
+if __name__ == "__main__":
+    main()
+
+4)
+def exibir_contatos(contatos):
+    for i, contato in enumerate(contatos):
+        print(f"{i + 1}. {contato['nome']}")
+
+# Função para editar um contato
+def editar_contato(contatos, indice):
+    
+   
+ if 0 <= indice < len(contatos):
+        contato = contatos[indice]
+        print(f"Editando o contato: {contato['nome']}")
+        novo_nome = input("Novo nome: ")
+        novo_endereco = input("Novo endereço: ")
+        novo_telefone = input("Novo telefone: ")
+
+        contato['nome'] = novo_nome
+        contato['endereco'] = novo_endereco
+        contato['telefone'] = novo_telefone
+
+# Lista de contatos (usando dicionários)
+contatos = [
+    {
+        'nome': 'João',
+        'endereco': 'Rua A, 123',
+        'telefone': '123-456-7890'
+    },
+    {
+        'nome': 'Maria',
+        'endereco': 'Rua B, 456',
+        'telefone': '987-654-3210'
+    }
+]
+
+while True:
+    print("\nLista de Contatos:")
+    exibir_contatos(contatos)
+
+    escolha = input("\nSelecione o número do contato que deseja editar (ou 'q' para sair): ")
+
+    if escolha.lower() == 'q':
+        break
+
+    try:
+        indice = int(escolha) - 1
+        editar_contato(contatos, indice)
+    except (ValueError, IndexError):
+        print("Escolha inválida. Tente novamente.")
+
+print("Encerrando o programa.")
